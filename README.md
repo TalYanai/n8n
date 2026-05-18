@@ -1,11 +1,15 @@
 # n8n Workflows
 
-Automation workflows built with [n8n](https://n8n.io) — an open-source workflow automation tool.
+Automation workflows built with [n8n](https://n8n.io) — an open-source workflow automation platform.
 
-Covers integrations, scheduled tasks, and event-driven pipelines connecting APIs, webhooks, and data sources.
+Connects APIs, webhooks, and data sources via event-driven pipelines without boilerplate code.
 
-> Workflow exports and documentation coming soon.
+## Use Cases
 
----
+- Scheduled data fetches and transformations
+- Webhook-triggered automations
+- Multi-service integrations (Telegram, Google, REST APIs)
+
+> Workflow exports and full documentation coming soon.
 
 **Author:** Tal Yanai · [@TalYanai](https://github.com/TalYanai)
