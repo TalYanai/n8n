@@ -1,0 +1,68 @@
+<svg viewBox="0 0 520 620" xmlns="http://www.w3.org/2000/svg" role="img">
+<defs><marker id="head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1f2328"/></marker></defs>
+<style>
+.box{fill:#fff;stroke:#1f2328;stroke-width:1.2}
+.store{fill:#fff;stroke:#0969da;stroke-width:1.6}
+.lbl{fill:#1f2328;font:600 14px sans-serif}
+.sub{fill:#57606a;font:13px sans-serif}
+.arr{stroke:#1f2328;stroke-width:1.4;fill:none;marker-end:url(#head)}
+</style>
+<rect width="100%" height="100%" fill="#fff"/>
+
+<title>PartyPlanner AI workflow</title>
+<desc>Top-to-bottom flow: webhook, input cleaning, validation, a Designer agent, an image render step, a Sender agent with two Gmail tools, and a success response. Failed validation goes to an organizer check, then a fallback e-mail or an HTTP 400. An error trigger alerts an admin by e-mail.</desc>
+<rect class="box" x="40" y="10" width="260" height="46" rx="8"/>
+<text class="lbl" x="170" y="31" text-anchor="middle">Webhook: party data</text>
+<text class="sub" x="170" y="48" text-anchor="middle">POST from front end</text>
+<path class="arr" d="M170 56 V78"/>
+<rect class="box" x="40" y="78" width="260" height="46" rx="8"/>
+<text class="lbl" x="170" y="99" text-anchor="middle">Code: clean inputs</text>
+<text class="sub" x="170" y="116" text-anchor="middle">sanitise, format lists</text>
+<path class="arr" d="M170 124 V146"/>
+<rect class="box" x="40" y="146" width="260" height="46" rx="8"/>
+<text class="lbl" x="170" y="167" text-anchor="middle">IF: input valid?</text>
+<text class="sub" x="170" y="184" text-anchor="middle">name and organizer set</text>
+<path class="arr" d="M170 192 V214"/>
+<rect class="box" x="40" y="214" width="260" height="46" rx="8"/>
+<text class="lbl" x="170" y="235" text-anchor="middle">Agent 1: Designer</text>
+<text class="sub" x="170" y="252" text-anchor="middle">Claude Sonnet 4.5, temp 0.7</text>
+<path class="arr" d="M170 260 V282"/>
+<rect class="store" x="40" y="282" width="260" height="46" rx="8"/>
+<text class="lbl" x="170" y="303" text-anchor="middle">Templated: render image</text>
+<text class="sub" x="170" y="320" text-anchor="middle">external image service</text>
+<path class="arr" d="M170 328 V350"/>
+<rect class="box" x="40" y="350" width="260" height="46" rx="8"/>
+<text class="lbl" x="170" y="371" text-anchor="middle">Set: keep image link</text>
+<text class="sub" x="170" y="388" text-anchor="middle">carry fields forward</text>
+<path class="arr" d="M170 396 V418"/>
+<rect class="box" x="40" y="418" width="260" height="46" rx="8"/>
+<text class="lbl" x="170" y="439" text-anchor="middle">Agent 2: Sender</text>
+<text class="sub" x="170" y="456" text-anchor="middle">Claude Sonnet 4.5, temp 0</text>
+<path class="arr" d="M300 441 H335"/>
+<rect class="store" x="335" y="418" width="165" height="46" rx="8"/>
+<text class="lbl" x="417" y="439" text-anchor="middle">2 Gmail tools</text>
+<text class="sub" x="417" y="456" text-anchor="middle">guests / organizer</text>
+<path class="arr" d="M170 464 V486"/>
+<rect class="box" x="40" y="486" width="260" height="46" rx="8"/>
+<text class="lbl" x="170" y="507" text-anchor="middle">Respond 200: success</text>
+<text class="sub" x="170" y="524" text-anchor="middle">JSON status: done</text>
+<path class="arr" d="M300 169 H335"/>
+<rect class="box" x="335" y="146" width="165" height="46" rx="8"/>
+<text class="lbl" x="417" y="167" text-anchor="middle">IF: organizer mail?</text>
+<text class="sub" x="417" y="184" text-anchor="middle">invalid input path</text>
+<path class="arr" d="M417 192 V214"/>
+<rect class="store" x="335" y="214" width="165" height="46" rx="8"/>
+<text class="lbl" x="417" y="235" text-anchor="middle">Gmail: data missing</text>
+<text class="sub" x="417" y="252" text-anchor="middle">asks to resubmit</text>
+<path class="arr" d="M417 260 V282"/>
+<rect class="box" x="335" y="282" width="165" height="46" rx="8"/>
+<text class="lbl" x="417" y="303" text-anchor="middle">Respond 400</text>
+<text class="sub" x="417" y="320" text-anchor="middle">no organizer mail</text>
+<rect class="box" x="335" y="486" width="165" height="46" rx="8"/>
+<text class="lbl" x="417" y="507" text-anchor="middle">Error Trigger</text>
+<text class="sub" x="417" y="524" text-anchor="middle">on workflow error</text>
+<path class="arr" d="M417 532 V554"/>
+<rect class="store" x="335" y="554" width="165" height="46" rx="8"/>
+<text class="lbl" x="417" y="575" text-anchor="middle">Gmail: alert admin</text>
+<text class="sub" x="417" y="592" text-anchor="middle">id, error, time</text>
+</svg>
